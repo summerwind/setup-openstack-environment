@@ -2,7 +2,7 @@ VERSION=1.0.0
 COMMIT=$(shell git rev-parse --verify HEAD)
 
 PACKAGES=$(shell go list ./... | grep -v /vendor/ | grep -v /cmd/)
-BUILD_FLAGS=-ldflags "-X main.VERSION=$(VERSION) -X main.COMMIT=$(COMMIT)"
+BUILD_FLAGS=-ldflags "-X main.version=$(VERSION) -X main.commit=$(COMMIT)"
 
 .PHONY: all
 all: build

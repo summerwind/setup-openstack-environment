@@ -11,13 +11,18 @@ import (
 const (
 	formatOpenStack = "openstack"
 	formatEC2       = "ec2"
-	envPrefix       = "OPENSTACK"
+
+	envPrefix = "OPENSTACK"
 )
 
 var (
+	version = "HEAD"
+	commit  = "Unknown"
+
 	flagFormat      string
 	flagOutput      string
 	flagConfigDrive string
+	flagVersion     bool
 )
 
 type MetaData interface {
@@ -34,6 +39,7 @@ func main() {
 	cmd.Flags().StringVarP(&flagFormat, "format", "f", "openstack", "Meta data format (\"openstack\" or \"ec2\")")
 	cmd.Flags().StringVarP(&flagOutput, "output", "o", "/etc/openstack-environment", "Path of output file")
 	cmd.Flags().StringVarP(&flagConfigDrive, "config-drive", "c", "", "Path of config drive")
+	cmd.Flags().BoolVarP(&flagVersion, "version", "v", false, "Show version information")
 
 	err := cmd.Execute()
 	if err != nil {
@@ -46,6 +52,11 @@ func run(cmd *cobra.Command, args []string) {
 		md  MetaData
 		err error
 	)
+
+	if flagVersion {
+		fmt.Printf("Version: %s (%s)\n", version, commit)
+		os.Exit(0)
+	}
 
 	switch flagFormat {
 	case formatOpenStack:
