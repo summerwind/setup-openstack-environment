@@ -5,7 +5,7 @@ This command is inspired by [setup-network-environment](https://github.com/kelse
 
 ## Usage
 
-`setup-openstack-environment` command will get the metadata information from the OpenStack metadata server.
+`setup-openstack-environment` command will get the metadata information from the OpenStack metadata.
 
 ```
 $ setup-openstack-environment
@@ -21,7 +21,7 @@ OPENSTACK_LAUNCH_INDEX=0
 OPENSTACK_NAME=test
 ```
 
-You can write the metadata information to a different file using the `-o` flag.
+You can specify the output file path using the `-o` flag.
 
 ```
 $ setup-network-environment -o /tmp/openstack-environment
@@ -31,6 +31,12 @@ With the `-c` flag, change the source of metadata infromation to the config driv
 
 ```
 $ setup-openstack-environment -c /mnt/config
+```
+
+By using the `-f` flag, the command will use metadata in EC2 format.
+
+```
+$ setup-openstack-environment -f ec2
 ```
 
 ## Build
