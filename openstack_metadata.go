@@ -72,10 +72,14 @@ func (md OpenStackMetaData) String() string {
 	buf.WriteString(fmt.Sprintf("%s_LAUNCH_INDEX=%d\n", envPrefix, md.LaunchIndex))
 	buf.WriteString(fmt.Sprintf("%s_NAME=%s\n", envPrefix, md.Name))
 	for key, val := range md.Meta {
-		buf.WriteString(fmt.Sprintf("%s_META_%s=%s\n", envPrefix, strings.ToUpper(key), val))
+		key = strings.ToUpper(key)
+		key = strings.Replace(key, "-", "_", -1)
+		buf.WriteString(fmt.Sprintf("%s_META_%s=%s\n", envPrefix, key, val))
 	}
 	for key, val := range md.PublicKeys {
-		buf.WriteString(fmt.Sprintf("%s_PUBLIC_KEYS_%s=%s\n", envPrefix, strings.ToUpper(key), strings.TrimSpace(val)))
+		key = strings.ToUpper(key)
+		key = strings.Replace(key, "-", "_", -1)
+		buf.WriteString(fmt.Sprintf("%s_PUBLIC_KEYS_%s=%s\n", envPrefix, key, strings.TrimSpace(val)))
 	}
 	buf.WriteString(fmt.Sprintf("%s_UUID=%s\n", envPrefix, md.UUID))
 

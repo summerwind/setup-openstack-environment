@@ -210,7 +210,9 @@ func (md EC2MetaData) String() string {
 	buf.WriteString(fmt.Sprintf("%s_AMI_LAUNCH_INDEX=%d\n", envPrefix, md.AMILaunchIndex))
 	buf.WriteString(fmt.Sprintf("%s_AMI_MANIFEST_PATH=%s\n", envPrefix, md.AMIManifestPath))
 	for key, val := range md.BlockDeviceMapping {
-		buf.WriteString(fmt.Sprintf("%s_BLOCK_DEVICE_MAPPING_%s=%s\n", envPrefix, strings.ToUpper(key), strings.TrimSpace(val)))
+		key = strings.ToUpper(key)
+		key = strings.Replace(key, "-", "_", -1)
+		buf.WriteString(fmt.Sprintf("%s_BLOCK_DEVICE_MAPPING_%s=%s\n", envPrefix, key, strings.TrimSpace(val)))
 	}
 	buf.WriteString(fmt.Sprintf("%s_HOSTNAME=%s\n", envPrefix, md.Hostname))
 	buf.WriteString(fmt.Sprintf("%s_INSTANCE_ACTION=%s\n", envPrefix, md.InstanceAction))
@@ -220,12 +222,16 @@ func (md EC2MetaData) String() string {
 	buf.WriteString(fmt.Sprintf("%s_LOCAL_HOSTNAME=%s\n", envPrefix, md.LocalHostname))
 	buf.WriteString(fmt.Sprintf("%s_LOCAL_IPV4=%s\n", envPrefix, md.LocalIPv4))
 	for key, val := range md.Placement {
-		buf.WriteString(fmt.Sprintf("%s_PLACEMENT_%s=%s\n", envPrefix, strings.ToUpper(key), strings.TrimSpace(val)))
+		key = strings.ToUpper(key)
+		key = strings.Replace(key, "-", "_", -1)
+		buf.WriteString(fmt.Sprintf("%s_PLACEMENT_%s=%s\n", envPrefix, key, strings.TrimSpace(val)))
 	}
 	buf.WriteString(fmt.Sprintf("%s_PUBLIC_HOSTNAME=%s\n", envPrefix, md.PublicHostname))
 	buf.WriteString(fmt.Sprintf("%s_PUBLIC_IPV4=%s\n", envPrefix, md.PublicIPv4))
 	for key, val := range md.PublicKeys {
-		buf.WriteString(fmt.Sprintf("%s_PUBLIC_KEYS_%s_OPENSSH_KEY=%s\n", envPrefix, strings.ToUpper(key), strings.TrimSpace(val.OpenSSHKey)))
+		key = strings.ToUpper(key)
+		key = strings.Replace(key, "-", "_", -1)
+		buf.WriteString(fmt.Sprintf("%s_PUBLIC_KEYS_%s_OPENSSH_KEY=%s\n", envPrefix, key, strings.TrimSpace(val.OpenSSHKey)))
 	}
 	buf.WriteString(fmt.Sprintf("%s_RAM_DISK_ID=%s\n", envPrefix, md.RAMDiskID))
 	buf.WriteString(fmt.Sprintf("%s_RESERVATION_ID=%s\n", envPrefix, md.ReservationID))
