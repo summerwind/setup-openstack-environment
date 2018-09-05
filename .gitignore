@@ -1,2 +1,4 @@
 setup-openstack-environment
+cover.out
 vendor/
+dist/
