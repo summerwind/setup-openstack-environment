@@ -2,7 +2,7 @@ version: '2'
 
 vars:
   NAME: setup-openstack-environment
-  VERSION: 1.1.1
+  VERSION: 1.2.0
   COMMIT: {sh: git rev-parse --verify HEAD}
   PACKAGES: {sh: go list ./...}
   BUILD_FLAGS: -ldflags "-X main.VERSION={{.VERSION}} -X main.COMMIT={{.COMMIT}}"
@@ -30,10 +30,6 @@ tasks:
       - mkdir -p dist
       - task: package
         vars: {OS: "linux", ARCH: "amd64"}
-      - task: package
-        vars: {OS: "linux", ARCH: "arm64"}
-      - task: package
-        vars: {OS: "linux", ARCH: "arm"}
   vendor:
     cmds:
       - dep ensure -v
